@@ -1,0 +1,37 @@
+project(radiosity)
+
+cmake_minimum_required(VERSION 3.2)
+enable_testing()
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -DBOOST_LOG_DYN_LINK --coverage -fprofile-arcs -ftest-coverage")
+
+set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
+
+set(RADIOSITY_INSTALL_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
+set(RADIOSITY_INSTALL_BIN_DIR ${PROJECT_SOURCE_DIR}/bin)
+set(RADIOSITY_INSTALL_LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
+set(RADIOSITY_INSTALL_SRC_DIR ${PROJECT_SOURCE_DIR}/src)
+set(RADIOSITY_INSTALL_TEST_DIR ${PROJECT_SOURCE_DIR}/test)
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+set(FORM_FACTOR_HEADERS_DIR ${RADIOSITY_INSTALL_SRC_DIR}/formfactor)
+set(GEOMETRIC_ENTITIES_HEADERS_DIR ${RADIOSITY_INSTALL_SRC_DIR}/geometry)
+
+set(EXTERNAL_LIB_DIR "/home/antonis/Projects/C++ libs")
+set(BOOST_LIB_DIR ${EXTERNAL_LIB_DIR}/Boost/boost_1_71_0/lib)
+set(BOOST_INCL_DIR ${EXTERNAL_LIB_DIR}/Boost/boost_1_71_0)
+
+include_directories(${RADIOSITY_INSTALL_INCLUDE_DIR})
+include_directories(${FORM_FACTOR_HEADERS_DIR})
+include_directories(${GEOMETRIC_ENTITIES_HEADERS_DIR})
+include_directories(${BOOST_INCL_DIR})
+
+link_directories(${BOOST_LIB_DIR})
+
+
+add_subdirectory(src)
+add_subdirectory(test)
